@@ -1,0 +1,79 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>rui.test</groupId>
+  <artifactId>maven</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>maven</name>
+  <url>http://maven.apache.org</url>
+  <description>
+  		我的测试项目，这个测试项目测试关于所有的maven的东西
+  </description>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>compile</scope>
+    </dependency>
+    
+    <dependency>
+	        <groupId>commons-io</groupId>
+	        <artifactId>commons-io</artifactId>
+	        <version>2.4</version>
+	        <scope>system</scope>
+	        <systemPath>${project.basedir}/lib/commons-io-2.4.jar</systemPath>
+    </dependency>
+    
+  </dependencies>
+  
+  
+  <build>
+  	<plugins>
+  		<plugin>
+             <groupId>org.apache.maven.plugins</groupId>
+             <artifactId>maven-jar-plugin</artifactId>
+             <version>2.6</version>
+             <configuration>
+                 <archive>
+                     <manifest>
+                         <addClasspath>true</addClasspath>
+                         <classpathPrefix>lib/</classpathPrefix>
+                         <mainClass>rui.test.maven.Entry</mainClass>
+                        
+                     </manifest>
+                     <manifestEntries>
+                     	<Class-Path>lib/commons-io-2.4.jar</Class-Path>
+                     </manifestEntries>
+                 </archive>
+             </configuration>
+         </plugin>
+  		 <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-dependency-plugin</artifactId>
+              <executions>
+                  <execution>
+                      <id>copy</id>
+                      <phase>install</phase>
+                      <goals>
+                          <goal>copy-dependencies</goal>
+                      </goals>
+                      <configuration>
+                          <outputDirectory>
+                              ${project.build.directory}/lib
+                          </outputDirectory>
+                      </configuration>
+                  </execution>
+              </executions>
+          </plugin>
+  	</plugins>
+  </build>
+</project>
